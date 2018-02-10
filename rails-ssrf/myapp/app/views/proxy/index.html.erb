@@ -1,0 +1,11 @@
+<h1>Proxy</h1>
+
+<% if @message %>
+     <%= @message %>
+<% end %>
+
+
+<%= form_tag('/proxy/index') do %>
+  <input type="text" name="url" /><br />
+  <input type="submit" value="send">
+<% end %>

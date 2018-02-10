@@ -1,0 +1,16 @@
+version: 1
+title: JavaScriptスキームを利用したXSS対策
+description: RailsにおけるJavaScriptスキームを利用したXSSの対策を学びます
+difficulty: beginner
+language: rails
+tag:
+    - rails
+    - xss
+text:
+    - title: JavaScriptスキームを利用したXSS
+      file: text/step1.md
+    - title: スキームの制限とRailsでの対策
+      file: text/step2.md
+files:
+    - myapp/app/views/users/index.html.erb
+    - myapp/app/controllers/users_controller.rb

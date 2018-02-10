@@ -1,0 +1,19 @@
+version: 1
+title: RubyにおけるSSRF対策
+description: Ruby2.4ではユーザーが入力したURLに対してResolvなどの処理を行うと、SSRF脆弱性を生じる可能性があります。
+difficulty: beginner
+language: rails
+tag:
+    - SSRF
+    - Ruby
+text:
+    - title: Server Side Request Forgery
+      file: text/step1.md
+    - title: 攻撃
+      file: text/step2.md
+    - title: 対策
+      file: text/step3.md
+files:
+    - myapp/lib/myapp/url_blocker.rb
+    - myapp/app/views/proxy/index.html.erb
+    - myapp/app/controllers/proxy_controller.rb
