@@ -6,3 +6,5 @@ CREATE TABLE contact(
     title TEXT NOT NULL,
     content TEXT NOT NULL
 );
+INSERT INTO contact (`id`, `title`, `content`) VALUES (1, 'こんにちは', 'やぁみんな');
+INSERT INTO contact (`id`, `title`, `content`) VALUES (2, 'こんにちは', 'やぁみんな');
