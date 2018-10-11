@@ -1,3 +1,1 @@
-# PHP Refrected XSS
-
-
+# PHP Stored XSS
