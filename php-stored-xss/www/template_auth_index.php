@@ -1,3 +1,10 @@
+<?php
+session_start();
+if ($_SESSION['id'] == '') {
+    header("Location: / ");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +60,7 @@
         </div>
     </div>
     <div class="app">
-        <h1>お問い合わせ一覧</h1>
+        <h1>お問い合わせ一覧<?php if ($_SESSION['id'] == 1885) {echo "　　Adminページ";}?></h1>
     <?php
     foreach ($contacts as $key => $contact) {
         $html   = "";
