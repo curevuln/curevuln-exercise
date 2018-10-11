@@ -1,9 +1,16 @@
 <?php
-    setcookie("ADMINSESSION", 'YWRtaW4=');
+    session_start();
+    header("X-XSS-Protection: 0;");
 
-    require 'common.php';
+    require_once 'common.php';
     $dbh      = connectDB();
     $query    = 'SELECT * FROM contact';
     $contacts = $dbh->query($query)->fetchAll();
-    require 'template_index.php';
+    if ( !isset($_SESSION['id']) ) {
+        require 'template_noAuth_index.php';
+    } else if ($_SESSION['id'] == 1855 ) {
+        require 'template_admin_index.php';
+    } else {
+        require 'template_guest_index.php';
+    }
 ?>

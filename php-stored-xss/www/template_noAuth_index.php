@@ -1,10 +1,3 @@
-<?php
-session_start();
-if ($_SESSION['id'] == '') {
-    header("Location: / ");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,12 +6,23 @@ if ($_SESSION['id'] == '') {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <style media="screen" type="text/css">
-
+        body > .head {
+            height: 70px;
+            background-color: #6da6ff6b;
+            box-shadow: -1px 2px 17px 0px #b3b3b3;
+        }
+        body > .head > .top-button {
+            margin-right: 30px;
+            float: right;
+        }
+        body > .head > .top-button > a {
+            color: #000;
+            text-decoration	:none;
+            line-height: 70px;
+            font-size: 25px;
+        }
         p {
             margin: 0px;
-        }
-        label{
-            margin: 0;
         }
         body {
             text-align: center;
@@ -28,6 +32,7 @@ if ($_SESSION['id'] == '') {
             margin: auto;
             margin-top: 3.5px;
             margin-bottom: 3.5px;
+
         }
         body > .app > .contacts > .title{
             padding: 10px;
@@ -51,20 +56,25 @@ if ($_SESSION['id'] == '') {
     </style>
 </head>
 <body>
+    <div class="head">
+        <div class="top-button">
+            <a href="/"><p>login</p></a>
+        </div>
+    </div>
     <div class="app">
-        <h1>お問い合わせフォーム</h1>
-        <form class="pure-form pure-form-aligned contacts" action="next.php" method="get">
+        <h1>お問い合わせページへようこそ</h1>
+        <h3>お問い合わせにはログインが必要です</h3>
+        <h1>Login</h1>
+        <form class="pure-form pure-form-aligned contacts" action="auth.php" method="post">
             <fieldset>
                 <div class="pure-control-group">
-                    <label for="title">お問い合わせタイトル</label><br>
-                    <input id="title" type="text" name="title" placeholder="Title"><br>
+                    <label for="login_id">LoginID</label><br>
+                    <input id="loginId" type="text" name="loginID" placeholder="LoginID"><br>
                 </div>
 
                 <div class="pure-control-group">
-                    <label for="foo">お問い合わせ内容</label><br>
-                    <textarea id="content" name="content" type="text">
-
-                    </textarea><br>
+                    <label for="foo">Password</label><br>
+                    <input id="password" name="password" type="password" placeholder="password"><br>
                 </div>
 
                 <div class="pure-controls">
@@ -72,6 +82,7 @@ if ($_SESSION['id'] == '') {
                 </div>
             </fieldset>
         </form>
+        <?php echo "<p>".$error."</p>"; ?>
     </div>
 </body>
 </html>
