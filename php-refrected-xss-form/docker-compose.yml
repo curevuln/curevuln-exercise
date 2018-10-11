@@ -21,12 +21,12 @@ services:
             - "80:80"
         depends_on:
             - "php-fpm"
-   mysql:
-      image: mysql:5.6
-      environment:
-        MYSQL_ALLOW_EMPTY_PASSWORD: "true"
-      volumes:
-        - "./db:/docker-entrypoint-initdb.d"
-        - "./mysql:/etc/mysql/conf.d"
-      ports:
-        - "3306:3306"
+    mysql:
+        image: mysql:5.6
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+        volumes:
+            - "./db:/docker-entrypoint-initdb.d"
+            - "./mysql:/etc/mysql/conf.d"
+        ports:
+            - "3306:3306"
