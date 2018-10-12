@@ -6,8 +6,8 @@
     $dbh      = connectDB();
     $query    = 'SELECT * FROM contact';
     $contacts = $dbh->query($query)->fetchAll();
-    if ( !isset($_SESSION['id']) ) {
-        require 'template_auuth_index.php';
+    if ( !$_SESSION['id'] == '' ) {
+        require 'template_auth_index.php';
     } else {
         require 'template_noAuth_index.php';
     }
