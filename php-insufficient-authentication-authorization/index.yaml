@@ -1,0 +1,29 @@
+vaersion: 1
+title: PHPに容易に推測可能なURLで示されるページの認証/認可不備
+description: PHPにおけるアクセス制御について学んでいきます。
+difficulty: beginner
+language: php
+tag:
+    - php
+    - xss
+text:
+    - title: アクセス制御の不備とは
+      file: text/step1.md
+    - title: 脆弱性の悪用例
+      file: text/step2.md
+    - title: 対策方法と修正方法
+      file: text/step3.md
+    - title: 留意点
+      file: text/step4.md
+files:
+    - www/auth.php
+    - www/authFunction.php
+    - www/common.php
+    - www/index.php
+    - www/input.php
+    - www/logout.php
+    - www/next.php
+    - www/template_auth_index.php
+    - www/template_noAuth_index.php
+    - www/template_input.php
+    - www/template_next.php
