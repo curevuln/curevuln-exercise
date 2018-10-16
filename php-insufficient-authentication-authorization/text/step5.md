@@ -7,5 +7,7 @@
 
 #### 参考文献
 [安全なWebサイトの作り方 P.46 1.11 アクセス制御や認可制御の欠落](https://www.ipa.go.jp/files/000017316.pdf)
+
 [体系的に学ぶ 安全なWebアプリケーションの作り方 P.507 5.3.2 認可不備の典型例](https://wasbook.org/)
+
 [Rails セキュリティガイド  6.ユーザー管理](https://railsguides.jp/security.html#%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E7%AE%A1%E7%90%86)
