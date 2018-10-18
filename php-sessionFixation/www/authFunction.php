@@ -21,7 +21,9 @@ function login (object $dbh, string $login, string $password):bool {
     if ( !password_verify($password, $usersData[0]['password']) ) {
         return (bool)false;
     }
-    //session_regenerate_id(TRUE);
+
+
+
     $_SESSION["userName"]   = $usersData[0]['loginId'];
     $_SESSION["id"]         = $usersData[0]['id'];
 

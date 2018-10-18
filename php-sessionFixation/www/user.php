@@ -11,15 +11,14 @@
     $dbh = connectDB();
     $id = Null;
     try {
-        $query = "INSERT INTO `contact` (`id`, `title`, `content`) VALUES ( :id, :title, :content );";
+        $dbh = connectDB();
+        $query = "SELECT * FROM users WHERE id = :userid ;";
         $stmt  = $dbh->prepare($query);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->bindParam(':title', $_GET['title'], PDO::PARAM_STR);
-        $stmt->bindParam(':content', $_GET['content'], PDO::PARAM_STR);
-        $stmt->execute();
+        $stmt->bindParam(':userid',$_SESSION['id'],PDO::PARAM_INT);
+        $users = $dbh->query($query)->fetchAll();
     } catch (PDOException $e) {
         echo $e;
     }
-    require 'template_next.php';
+    require 'template_user.php';
 
 ?>

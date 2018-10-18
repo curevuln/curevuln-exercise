@@ -15,7 +15,7 @@ if ($_SESSION['id'] == '') {
     <style media="screen" type="text/css">
         body > .head {
             height: 70px;
-            background-color: #6da6ff6b;
+            background-color: #248447a3;
             box-shadow: -1px 2px 17px 0px #b3b3b3;
         }
         body > .head > .top-button {
@@ -56,22 +56,23 @@ if ($_SESSION['id'] == '') {
 <body>
     <div class="head">
         <div class="top-button">
-            <a href="logout.php"><p>Logout</p></a>
+            <a href="/"><div>Top</div></a>
+            <a href="user.php"><div>Info</div></a>
+            <a href="logout.php"><div>Logout</div></a>
         </div>
     </div>
     <div class="app">
-        <h1>お問い合わせ一覧<?php if ($_SESSION['id'] == 1885) {echo "　　Adminページ";}?></h1>
-    <?php
-    foreach ($contacts as $key => $contact) {
-        $html   = "";
-        $html  .= "<div class='contacts'><div class='title'> <p> タイトル : ";
-        $html  .= $contact['title'];
-        $html  .= "</p></div><div class='content'> <p>";
-        $html  .= $contact['content'];
-        $html  .= "</p></div></div>";
-        echo $html;
-    }
-    ?>
+        <h1>和菓子はこちらから</h1>
+
+        <?php foreach ($products as $key => $product): ?>
+            <div class="product">
+                <img width="380" height="380" src="./img/<?php echo $product['image'] ?>.jpg" alt="">
+                <h3><?php echo $product['title']; ?></h3>
+                <p><?php echo $product['content'] ?></p>
+                <p><?php echo $product['price'] ?></p>
+                <a href="product.php?id=<?php echo $product['id'] ?>">詳細はこちら</a>
+            </div>
+        <?php endforeach; ?>
     <a href="input.php">問い合わせ入力はこちら</a>
     </div>
 </body>

@@ -1,3 +1,10 @@
+<?php
+session_start();
+if ($_SESSION['id'] == '') {
+    header("Location: / ");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +37,7 @@
         body > .app > .contacts{
             width: 60%;
             margin: auto;
+            border: groove;
             margin-top: 3.5px;
             margin-bottom: 3.5px;
 
@@ -43,45 +51,59 @@
             padding: 10px;
             background-color: rgba(0, 0, 0, 0.13);
         }
-        .pure-form-aligned .pure-control-group label{
-            text-align: center;
-
-        }
-        .pure-form-aligned .pure-control-group input, .pure-form-aligned .pure-control-group textarea{
-            width: 100%;
-        }
-        .pure-form-aligned .pure-controls{
-                margin: auto;
-        }
     </style>
 </head>
 <body>
     <div class="head">
         <div class="top-button">
-            <a href="/"><p>login</p></a>
+            <a href="/"><div>Top</div></a>
+            <a href="user.php"><div>Info</div></a>
+            <a href="logout.php"><div>Logout</div></a>
         </div>
     </div>
     <div class="app">
-        <h1>和菓子ショップ なごみ</h1>
-        <h1>Login</h1>
-        <form class="pure-form pure-form-aligned contacts" action="auth.php" method="post">
+        <h1><?php echo $products[0]['title']; ?></h1>
+        <?php foreach ($products as $key => $product): ?>
+            <div class="product">
+                <img width="380" height="380"  src="./img/<?php echo $product['image'] ?>.jpg" alt="<?php echo $product['image'] ?>">
+                <h3><?php echo $product['title']; ?></h3>
+                <p><?php echo $product['content']; ?></p>
+                <p><?php echo $product['price']; ?></p>
+                <a href="product.php?id=<?php echo $product['id'] ?>">購入はこちら</a>
+            </div>
+        <?php endforeach; ?>
+        <h1>レビュー一覧</h1>
+        <?php foreach ($reviews as $key => $review): ?>
+            <div class="review">
+                <div class="review-title">
+                    <h3><?php $review['title'] ?></h3>
+                </div>
+                <div class="review-content">
+                    <?php $review['review'] ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+        <h1>レビュー投稿</h1>
+        <form class="pure-form pure-form-aligned contacts" action="comment.php" method="post">
             <fieldset>
                 <div class="pure-control-group">
-                    <label for="login_id">LoginID</label><br>
-                    <input id="loginId" type="text" name="loginID" placeholder="LoginID"><br>
+                    <label for="title">レビュータイトル</label><br>
+                    <input id="title" type="text" name="title" placeholder="Title"><br>
                 </div>
 
                 <div class="pure-control-group">
-                    <label for="foo">Password</label><br>
-                    <input id="password" name="password" type="password" placeholder="password"><br>
+                    <label for="foo">内容</label><br>
+                    <textarea id="review" name="review" type="text">
+
+                    </textarea><br>
                 </div>
+                <input id="product_id" type="hidden" name="product_id" value="<?php echo $products[0]['id']?>"><br>
 
                 <div class="pure-controls">
                     <button type="submit" class="pure-button pure-button-primary">送信</button>
                 </div>
             </fieldset>
         </form>
-        <?php echo "<p>".$error."</p>"; ?>
     </div>
 </body>
 </html>

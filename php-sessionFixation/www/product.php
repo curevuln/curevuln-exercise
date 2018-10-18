@@ -8,18 +8,26 @@
     }
 
     require 'common.php';
-    $dbh = connectDB();
     $id = Null;
     try {
-        $query = "INSERT INTO `contact` (`id`, `title`, `content`) VALUES ( :id, :title, :content );";
+
+        $dbh = connectDB();
+        $query = "SELECT * FROM product WHERE id = :productID ;";
         $stmt  = $dbh->prepare($query);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->bindParam(':title', $_GET['title'], PDO::PARAM_STR);
-        $stmt->bindParam(':content', $_GET['content'], PDO::PARAM_STR);
+        $stmt->bindParam(':productID',$_GET['id'],PDO::PARAM_STR);
         $stmt->execute();
+        $products = $stmt->fetchAll();
+
+        $dbh = connectDB();
+        $query = "SELECT * FROM review WHERE produ_id = :productID ;";
+        $stmt  = $dbh->prepare($query);
+        $stmt->bindParam(':productID',$_GET['id'],PDO::PARAM_STR);
+        $stmt->execute();
+        $reviews =  $stmt->fetchAll();
+
     } catch (PDOException $e) {
         echo $e;
     }
-    require 'template_next.php';
+    require 'template_product.php';
 
 ?>
