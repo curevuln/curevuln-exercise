@@ -58,7 +58,7 @@
 <body>
     <div class="head">
         <div class="top-button">
-            <a href="/"><p>login</p></a>
+            <a href="/logout.php"><p>Logout</p></a>
         </div>
     </div>
     <div class="app">
