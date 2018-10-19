@@ -1,10 +1,3 @@
-<?php
-session_start();
-if ($_SESSION['id'] == '') {
-    header("Location: / ");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,60 +5,8 @@ if ($_SESSION['id'] == '') {
     <title>Us List - Index</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
-    <style media="screen" type="text/css">
-        body > .head {
-            height: 70px;
-            background-color: #248447a3;
-            box-shadow: -1px 2px 17px 0px #b3b3b3;
-        }
-        body > .head > .top-button {
-            margin-right: 30px;
-            float: right;
-        }
-        body > .head > .top-button > a {
-            color: #000;
-            text-decoration	:none;
-            line-height: 70px;
-            font-size: 25px;
-        }
-        p {
-            margin: 0px;
-        }
-        p {
-            margin: 0px;
-        }
-        label{
-            margin: 0;
-        }
-        body {
-            text-align: center;
-        }
-        body > .app > .contacts{
-            width: 60%;
-            margin: auto;
-            margin-top: 3.5px;
-            margin-bottom: 3.5px;
-        }
-        body > .app > .contacts > .title{
-            padding: 10px;
-            background-color: #6472c370;
-            box-shadow: -2px 1px 9px #0000007a;
-        }
-        body > .app > .contacts > .content{
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.13);
-        }
-        .pure-form-aligned .pure-control-group label{
-            text-align: center;
+    <link rel="stylesheet" href="/css/app.css">
 
-        }
-        .pure-form-aligned .pure-control-group input, .pure-form-aligned .pure-control-group textarea{
-            width: 100%;
-        }
-        .pure-form-aligned .pure-controls{
-                margin: auto;
-        }
-    </style>
 </head>
 <body>
     <div class="head">
@@ -77,12 +18,24 @@ if ($_SESSION['id'] == '') {
     </div>
     <div class="app">
         <h1>ユーザー情報</h1>
-        <h3>名前</h3>
-        <p><?php echo $users[0]['name'] ?></p>
-        <h3>住所</h3>
-        <p><?php echo $users[0]['addr'] ?></p>
-        <h3>電話番号</h3>
-        <p><?php echo $users[0]['addr'] ?></p>
+        <h3>名前 : <?php echo htmlspecialchars( $users[0]['name'], ENT_QUOTES )?></h3>
+        <h3>住所 : <?php echo htmlspecialchars( $users[0]['addr'], ENT_QUOTES ) ?></h3>
+        <h3>電話番号 : <?php echo htmlspecialchars( $users[0]['tel'], ENT_QUOTES ) ?></h3>
+
+        <div class="history">
+            <h1>購入履歴</h1>
+            <?php foreach ($shippings as $key => $shipping): ?>
+            <div class="list">
+                <h3 class="left"><?php echo $key+1; ?></h3>
+                <h3>宛名 : <?php echo htmlspecialchars( $shipping['name'], ENT_QUOTES )?></h3>
+                <h3>宛先 : <?php echo htmlspecialchars( $shipping['addr'], ENT_QUOTES )?></h3>
+                <h3>商品名 : <?php echo htmlspecialchars( $shipping['title'], ENT_QUOTES )?></h3>
+                <h3>個数 : <?php echo htmlspecialchars( $shipping['num'], ENT_QUOTES )?></h3>
+                <h3>合計 : <?php echo htmlspecialchars( $shipping['price'], ENT_QUOTES )?></h3>
+            </div>
+
+            <?php endforeach; ?>
+        </div>
     </div>
 </body>
 </html>

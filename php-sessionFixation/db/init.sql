@@ -13,8 +13,9 @@ CREATE TABLE shipping(
     id          INTEGER AUTO_INCREMENT PRIMARY KEY,
     user_id     INTEGER NOT NULL,
     product_id  INTEGER NOT NULL,
+    name        TEXT NOT NULL,
     num         INTEGER NOT NULL,
-    price       TEXT NOT NULL,
+    price       INTEGER NOT NULL,
     addr        TEXT NOT NULL
 );
 CREATE TABLE users(

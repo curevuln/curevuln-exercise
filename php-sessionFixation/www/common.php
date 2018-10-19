@@ -1,5 +1,5 @@
 <?php
-session_start();
+require 'setting.php'
 
 function connectDB() {
     $dbname = 'mysql:host=' . $_ENV['DATABASE_HOST'] . ';dbname=shop;charset=utf8mb4';

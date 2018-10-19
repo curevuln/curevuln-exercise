@@ -1,10 +1,3 @@
-<?php
-session_start();
-if ($_SESSION['id'] == '') {
-    header("Location: / ");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,46 +5,7 @@ if ($_SESSION['id'] == '') {
     <title>Us List - Index</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
-    <style media="screen" type="text/css">
-        body > .head {
-            height: 70px;
-            background-color: #248447a3;
-            box-shadow: -1px 2px 17px 0px #b3b3b3;
-        }
-        body > .head > .top-button {
-            margin-right: 30px;
-            float: right;
-        }
-        body > .head > .top-button > a {
-            color: #000;
-            text-decoration	:none;
-            line-height: 70px;
-            font-size: 25px;
-        }
-        p {
-            margin: 0px;
-        }
-        body {
-            text-align: center;
-        }
-        body > .app > .contacts{
-            width: 60%;
-            margin: auto;
-            border: groove;
-            margin-top: 3.5px;
-            margin-bottom: 3.5px;
-
-        }
-        body > .app > .contacts > .title{
-            padding: 10px;
-            background-color: #6472c370;
-            box-shadow: -2px 1px 9px #0000007a;
-        }
-        body > .app > .contacts > .content{
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.13);
-        }
-    </style>
+    <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
     <div class="head">
@@ -68,18 +22,18 @@ if ($_SESSION['id'] == '') {
                 <img width="380" height="380"  src="./img/<?php echo $product['image'] ?>.jpg" alt="<?php echo $product['image'] ?>">
                 <h3><?php echo $product['title']; ?></h3>
                 <p><?php echo $product['content']; ?></p>
-                <p><?php echo $product['price']; ?></p>
-                <a href="product.php?id=<?php echo $product['id'] ?>">購入はこちら</a>
+                <p>¥<?php echo $product['price']; ?></p>
+                <a href="shipping.php?id=<?php echo $product['id'] ?>">購入はこちら</a>
             </div>
         <?php endforeach; ?>
         <h1>レビュー一覧</h1>
         <?php foreach ($reviews as $key => $review): ?>
             <div class="review">
                 <div class="review-title">
-                    <h3><?php $review['title'] ?></h3>
+                    <h3>レビュータイトル : <?php echo $review['title'] ?></h3>
                 </div>
                 <div class="review-content">
-                    <?php $review['review'] ?>
+                    <?php echo $review['review'] ?>
                 </div>
             </div>
         <?php endforeach; ?>

@@ -1,7 +1,5 @@
 <?php
-session_start();
-header("X-XSS-Protection: 0;");
-
+require 'setting.php'
 require_once 'common.php';
 require './authFunction.php';
 //変数定義
