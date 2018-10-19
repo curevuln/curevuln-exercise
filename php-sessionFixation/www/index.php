@@ -1,5 +1,5 @@
 <?php
-require 'setting.php'
+require 'setting.php';
 
 require_once 'common.php';
 $dbh      = connectDB();
