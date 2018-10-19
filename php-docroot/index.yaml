@@ -7,16 +7,13 @@ tag:
     - php
     - xss
 text:
-    - title: XSS概要
+    - title: ファイルのあやまった公開(docroot)とは
       file: text/step1.md
-    - title: 悪用例
+    - title: 脆弱性の悪用
       file: text/step2.md
-    - title: 根本的対策
+    - title: 対策方法解説
       file: text/step3.md
-    - title: PHPにおける対策
-      file: text/step4.md
-    - title: 修正
-      file: text/step5.md
+
 files:
     - www/.htaccess
     - www/template_index.php
