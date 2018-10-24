@@ -13,15 +13,28 @@
 <body>
 	<div class="ui inverted segment">
   	<div class="ui inverted secondary pointing menu">
-    	<a class="item" href="/">
+      <a class="active item" href="/">
       	Home
     	</a>
-    	<a class="active item" href="/settings.php">
+      <a class="item" href="/settings.php">
       	Settings
     	</a>
   	</div>
 	</div>
 	<div class="ui raised very padded text container segment">
+    <div>
+    <?php
+      if (isset($response)) {
+        if ($response['code'] === 200) {
+          echo "<p>webhook の送信に成功しました</p>";
+          echo htmlspecialchars($response['body'], ENT_QUOTES, 'utf-8');
+        } else {
+          echo "<p>webhook の送信に失敗しました</p>";
+          echo htmlspecialchars($response['body'], ENT_QUOTES, 'utf-8');
+        }
+      }
+    ?>
+    </div>
  		<h2 class="ui header">投稿</h2>
 		<form class="ui form" action="/post.php" method="post">
 			<div class="field">
