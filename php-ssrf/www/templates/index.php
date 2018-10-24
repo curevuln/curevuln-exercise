@@ -22,7 +22,11 @@
   	</div>
 	</div>
 	<div class="ui raised very padded text container segment">
- 		<h2 class="ui header">Articles</h2>
+    <div class="ui clearing vertical segment">
+ 		  <h2 class="ui header">Articles
+        <a href="/post.php"><button class="ui button right floated primary">投稿する</button></a>
+      </h2>
+    </div>
     <div class="ui cards">
     <?php foreach ($result as $article): ?>
       <div class="card">
