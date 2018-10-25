@@ -1,0 +1,33 @@
+vaersion: 1
+title: PHPにおけるXSS対策の基本(フォーム編)
+description: PHPにおけるXSS対策の基本を学びます
+difficulty: beginner
+language: php
+tag:
+    - php
+    - xss
+text:
+    - title: セッションに関わる脆弱性の概要
+      file: text/step1.md
+    - title: 脆弱性の悪用
+      file: text/step2.md
+    - title: 対策方法の解説
+      file: text/step3.md
+    - title: 実際の対策方法
+      file: text/step4.md
+    - title: 修正方法の例
+      file: text/step5.md
+files:
+    - www/auth.php
+    - www/authFunction.php
+    - www/common.php
+    - www/index.php
+    - www/logout.php
+    - www/product.php
+    - www/shopping.php
+    - www/user.php
+    - www/template_auth_index.php
+    - www/template_noAuth_index.php
+    - www/template_product.php
+    - www/template_shopping.php
+    - www/template_user.php
