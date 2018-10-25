@@ -20,7 +20,7 @@
         <h1>購入手続き</h1>
         <h3>購入商品 :  <?php echo htmlspecialchars($products[0]['title'], ENT_QUOTES) ?></h3>
         <h3>価格　: ¥  <?php echo htmlspecialchars($products[0]['price'], ENT_QUOTES) ?></h3>
-        <form class="pure-form pure-form-aligned contacts" action="shipping.php" method="post">
+        <form class="pure-form pure-form-aligned contacts" action="shopping.php" method="post">
             <fieldset>
                 <div class="pure-control-group">
                     <label for="title">宛名</label><br>
