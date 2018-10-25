@@ -23,7 +23,7 @@
                 <h3><?php echo $product['title']; ?></h3>
                 <p><?php echo $product['content']; ?></p>
                 <p>¥<?php echo $product['price']; ?></p>
-                <a href="shipping.php?id=<?php echo $product['id'] ?>">購入はこちら</a>
+                <a href="shopping.php?id=<?php echo $product['id'] ?>">購入はこちら</a>
             </div>
         <?php endforeach; ?>
         <h1>レビュー一覧</h1>
