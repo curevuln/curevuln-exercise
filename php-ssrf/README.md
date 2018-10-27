@@ -1,5 +1,3 @@
-# PHP & MySQL Template
-
+# PHPにおけるSSRFの対策
 ---
 
-PHP と MySQL を動作させるためのテンプレートです。
