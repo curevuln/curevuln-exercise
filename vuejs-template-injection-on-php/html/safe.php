@@ -33,7 +33,7 @@
     </form>
 
     <div id="app">
-      <div>
+      <div v-pre>
         検索結果:
         <?= htmlspecialchars((string) $_GET['search']) ?>
       </div>
