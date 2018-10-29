@@ -1,0 +1,13 @@
+{
+    "name": "kohei.morita/www",
+    "authors": [
+        {
+            "name": "mrtc0",
+            "email": "mrtc0@ssrf.in"
+        }
+    ],
+    "require": {
+        "cebe/markdown": "^1.2",
+        "ezyang/htmlpurifier": "^4.10"
+    }
+}
