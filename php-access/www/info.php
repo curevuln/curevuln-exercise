@@ -13,7 +13,7 @@
     try {
 
         $stmt   = $dbh->prepare($query);
-        $stmt->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
+        $stmt->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
         $stmt->execute();
         $usersData = $stmt->fetchAll();
 
