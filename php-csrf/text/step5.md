@@ -1,39 +1,44 @@
 ### 修正例
-XSSの脆弱性がこのシナリオではありましたがここではその修正を行いません。
-
-セッション固定化攻撃に対する修正例です。
-authFunction.php
+この脆弱性で修正する箇所は多くあります。
+4つの例をあげて進めていきます。
+####setting.php
+生成と比較を行う関数を追加する。
 ```php
-function login (object $dbh, string $login, string $password):bool {
+//~~~前略~~~//
+/*
+*生成用の関数
+*/
+function csrftoken () {
 
-    $query  = " SELECT * FROM users WHERE loginid = :loginId; " ;
-    try {
-
-        $stmt   = $dbh->prepare($query);
-        $stmt->bindParam(':loginId', $login, PDO::PARAM_STR);
-        $stmt->execute();
-        $usersData = $stmt->fetchAll();
-
-    } catch (PDOException $e) {
-        return (bool)false ;
+    return bin2hex(openssl_random_pseudo_bytes(128));
+}
+/*
+* 比較用関数
+*/
+function csrftokenCheck () {
+    if ( hash_equals($_SESSION['csrfToken'], $_POST['csrftoken'] ) ) {
+        return (bool)true;
     }
-    if ( !password_verify($password, $usersData[0]['password']) ) {
-        return (bool)false;
-    }
-    //ここに追加
-    session_regenerate_id(true);
-
-    $_SESSION["userName"]   = $usersData[0]['loginId'];
-    $_SESSION["id"]         = $usersData[0]['id'];
-
-    return (bool)true;
-
+    return (bool)false;
+}
+```
+#### comment.php
+DB操作や重要な処理の前に比較をする。
+```php
+if ( !csrftokenCheck() ) {
+    header('Location: /');
+    exit();
 }
 ```
 
-次にHTTPonlyの修正例ですが、今回はphp.iniではなくphp内部で修正していきます。
-setting.phpの最初の行
+#### shopping.php
+Formのあるページを読み込む前にTokenを設定する。
 ```php
-ini_set('session.cookie_httponly', 1);
-ini_set('session.cookie_secure', 1);
+$_SSSION['csrfToken']   =  csrftoken();
+```
+
+#### template_shopping.php
+Formの中に追加をする。
+```html
+<input type="hidden" name="csrfToken" value="<?php echo $_SESSION['csrfToken'] ?>">
 ```
