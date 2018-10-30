@@ -1,0 +1,1 @@
+# PHP Session Fixation
