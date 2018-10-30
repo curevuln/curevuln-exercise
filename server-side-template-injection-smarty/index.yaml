@@ -1,0 +1,18 @@
+vaersion: 1
+title: Smartyによるサーバーサイドテンプレートインジェクション
+description: Smartyテンプレートを動的に生成した際のサーバーサイドテンプレートインジェクションについて学びます
+difficulty: beginner
+language: php
+tag:
+    - php
+    - ssti
+text:
+    - title: 概要
+      file: text/step1.md
+    - title: 攻撃方法
+      file: text/step2.md
+    - title: 対策
+      file: text/step3.md
+files:
+    - html/index.php
+    - html/templates/index.tpl
