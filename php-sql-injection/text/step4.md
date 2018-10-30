@@ -26,5 +26,22 @@ authorのパラメータに設定された文字列をそのままチェック�
 
 ### 攻撃の対策
 
-search.phpをプレースホルダを使うように書き換えることで脆弱性をなくすことができます。
+search.phpをプレースホルダを使うように書き換えることで脆弱性をなくすことができます。具体的には最初のデータベースをアクセスする部分は以下のように書き換えます。
 
+```php
+<?php
+    session_start();
+    header("X-XSS-Protection: 0;");
+    $author = $_GET['author'];
+    try {
+        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::MYSQL_ATTR_MULTI_STATEMENTS => false,
+            PDO::ATTR_EMULATE_PREPARES => false);
+        $dbname = 'mysql:host=' . $_ENV['DATABASE_HOST'] . ';dbname=sampledb;charset=utf8mb4';
+        $dbh = new PDO($dbname, 'root', '', $options);
+        $sqlcode = "SELECT * FROM booklist WHERE author = ? ORDER BY id";
+        $result = $dbh->prepare($sqlcode);
+        $result->bindValue(1, $author, PDO::PARAM_STR);
+        $result->execute();
+?>
+```
