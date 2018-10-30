@@ -1,13 +1,39 @@
-### URLに埋め込まれた認証/認可情報の対策
-共有ストレージサービスなどで複数人の情報共有を行うなど、秘密のURLをやむを得ず使う場合は、以下の事項に注意する必要があります。
+### 修正例
+XSSの脆弱性がこのシナリオではありましたがここではその修正を行いません。
 
-- アクセス可能な時間を極力短くする。
-- URLを公開してはならないことを利用者に注意喚起する。
-- 第3者が推測しづらい十分に長いランダムな文字列をURLに使用します。
+セッション固定化攻撃に対する修正例です。
+authFunction.php
+```php
+function login (object $dbh, string $login, string $password):bool {
 
-#### 参考文献
-[安全なWebサイトの作り方 P.46 1.11 アクセス制御や認可制御の欠落](https://www.ipa.go.jp/files/000017316.pdf)
+    $query  = " SELECT * FROM users WHERE loginid = :loginId; " ;
+    try {
 
-[体系的に学ぶ 安全なWebアプリケーションの作り方 P.507 5.3.2 認可不備の典型例](https://wasbook.org/)
+        $stmt   = $dbh->prepare($query);
+        $stmt->bindParam(':loginId', $login, PDO::PARAM_STR);
+        $stmt->execute();
+        $usersData = $stmt->fetchAll();
 
-[Rails セキュリティガイド  6.ユーザー管理](https://railsguides.jp/security.html#%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E7%AE%A1%E7%90%86)
+    } catch (PDOException $e) {
+        return (bool)false ;
+    }
+    if ( !password_verify($password, $usersData[0]['password']) ) {
+        return (bool)false;
+    }
+    //ここに追加
+    session_regenerate_id(true);
+
+    $_SESSION["userName"]   = $usersData[0]['loginId'];
+    $_SESSION["id"]         = $usersData[0]['id'];
+
+    return (bool)true;
+
+}
+```
+
+次にHTTPonlyの修正例ですが、今回はphp.iniではなくphp内部で修正していきます。
+setting.phpの最初の行
+```php
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_secure', 1);
+```
