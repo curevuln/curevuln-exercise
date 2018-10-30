@@ -19,16 +19,5 @@ text:
     - title: 修正方法の例
       file: text/step5.md
 files:
-    - www/auth.php
     - www/authFunction.php
-    - www/common.php
-    - www/index.php
-    - www/logout.php
-    - www/product.php
-    - www/shopping.php
-    - www/user.php
-    - www/template_auth_index.php
-    - www/template_noAuth_index.php
     - www/template_product.php
-    - www/template_shopping.php
-    - www/template_user.php
