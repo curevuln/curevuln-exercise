@@ -1,11 +1,11 @@
 vaersion: 1
-title: PHPにおけるXSS対策の基本(フォーム編)
-description: PHPにおけるXSS対策の基本を学びます
+title: ApacheにおけるDocroot問題
+description: Apacheの設定によるディレクトリの閲覧によるファイル一覧の開示を体験しよう。
 difficulty: beginner
 language: php
 tag:
     - php
-    - xss
+    - Docroot
 text:
     - title: ファイルのあやまった公開(docroot)とは
       file: text/step1.md
@@ -17,9 +17,3 @@ text:
 files:
     - www/.htaccess
     - www/template_index.php
-    - www/index.php
-    - www/template_login.php
-    - www/login.php
-    - www/logout.php
-    - www/common.php
-    - www/loginFunction.php
