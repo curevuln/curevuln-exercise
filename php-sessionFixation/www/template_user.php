@@ -1,3 +1,8 @@
+<?php
+if ($_SESSION['id'] == '') {
+    header('Location: /');
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>

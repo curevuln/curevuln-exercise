@@ -10,9 +10,14 @@
 <body>
     <div class="head">
         <div class="top-button">
-            <a href="/"><div>Top</div></a>
-            <a href="user.php"><div>Info</div></a>
-            <a href="logout.php"><div>Logout</div></a>
+            <?php if ($_SESSION['id'] != ''): ?>
+                <a href="/"><div>Top</div></a>
+                <a href="user.php"><div>Info</div></a>
+                <a href="logout.php"><div>Logout</div></a>
+            <?php else: ?>
+                <a href="/"><p>Top</p></a>
+                <a href="./login.php"><p>login</p></a>
+            <?php endif; ?>
         </div>
     </div>
     <div class="app">
@@ -23,7 +28,11 @@
                 <h3><?php echo $product['title']; ?></h3>
                 <p><?php echo $product['content']; ?></p>
                 <p>¥<?php echo $product['price']; ?></p>
+                <?php if ($_SESSION['id'] != ''): ?>
                 <a href="shopping.php?id=<?php echo $product['id'] ?>">購入はこちら</a>
+                <?php else: ?>
+                <a href="./login.php">購入にはLoginが必要です</a>
+                <?php endif; ?>
             </div>
         <?php endforeach; ?>
         <h1>レビュー一覧</h1>
@@ -37,27 +46,29 @@
                 </div>
             </div>
         <?php endforeach; ?>
-        <h1>レビュー投稿</h1>
-        <form class="pure-form pure-form-aligned contacts" action="comment.php" method="post">
-            <fieldset>
-                <div class="pure-control-group">
-                    <label for="title">レビュータイトル</label><br>
-                    <input id="title" type="text" name="title" placeholder="Title"><br>
-                </div>
+        <?php if ($_SESSION['id'] != ''): ?>
+            <h1>レビュー投稿</h1>
+            <form class="pure-form pure-form-aligned contacts" action="comment.php" method="post">
+                <fieldset>
+                    <div class="pure-control-group">
+                        <label for="title">レビュータイトル</label><br>
+                        <input id="title" type="text" name="title" placeholder="Title"><br>
+                    </div>
 
-                <div class="pure-control-group">
-                    <label for="foo">内容</label><br>
-                    <textarea id="review" name="review" type="text">
+                    <div class="pure-control-group">
+                        <label for="foo">内容</label><br>
+                        <textarea id="review" name="review" type="text">
 
-                    </textarea><br>
-                </div>
-                <input id="product_id" type="hidden" name="product_id" value="<?php echo $products[0]['id']?>"><br>
+                        </textarea><br>
+                    </div>
+                    <input id="product_id" type="hidden" name="product_id" value="<?php echo $products[0]['id']?>"><br>
 
-                <div class="pure-controls">
-                    <button type="submit" class="pure-button pure-button-primary">送信</button>
-                </div>
-            </fieldset>
-        </form>
+                    <div class="pure-controls">
+                        <button type="submit" class="pure-button pure-button-primary">送信</button>
+                    </div>
+                </fieldset>
+            </form>
+        <?php endif; ?>
     </div>
 </body>
 </html>

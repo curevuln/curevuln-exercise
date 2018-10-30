@@ -1,9 +1,5 @@
 <?php
 require 'setting.php';
-if ($_SESSION['id'] == '') {
-    header("Location: / ");
-    exit();
-}
 require 'common.php';
 $id = Null;
 try {

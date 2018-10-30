@@ -1,9 +1,3 @@
-<?php
-if ($_SESSION['id'] == '') {
-    header("Location: / ");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,9 +10,14 @@ if ($_SESSION['id'] == '') {
 <body>
     <div class="head">
         <div class="top-button">
-            <a href="/"><div>Top</div></a>
-            <a href="user.php"><div>Info</div></a>
-            <a href="logout.php"><div>Logout</div></a>
+            <?php if ($_SESSION['id'] != ''): ?>
+                <a href="/"><div>Top</div></a>
+                <a href="user.php"><div>Info</div></a>
+                <a href="logout.php"><div>Logout</div></a>
+            <?php else: ?>
+                <a href="/"><p>Top</p></a>
+                <a href="./login.php"><p>login</p></a>
+            <?php endif; ?>
         </div>
     </div>
     <div class="app">

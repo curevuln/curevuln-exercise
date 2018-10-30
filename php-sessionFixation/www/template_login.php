@@ -1,3 +1,8 @@
+<?php
+if ($_SESSION['id'] != '') {
+    header('Location: /');
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,19 +15,19 @@
 <body>
     <div class="head">
         <div class="top-button">
-            <a href="/"><p>login</p></a>
+            <a href="/"><p>Top</p></a>
+            <a href="./login.php"><p>login</p></a>
         </div>
     </div>
     <div class="app">
         <h1>和菓子ショップ なごみ</h1>
         <h1>Login</h1>
-        <form class="pure-form pure-form-aligned contacts" action="auth.php" method="post">
+        <form class="pure-form pure-form-aligned contacts" action="login.php" method="post">
             <fieldset>
                 <div class="pure-control-group">
                     <label for="login_id">LoginID</label><br>
                     <input id="loginId" type="text" name="loginID" placeholder="LoginID"><br>
                 </div>
-
                 <div class="pure-control-group">
                     <label for="foo">Password</label><br>
                     <input id="password" name="password" type="password" placeholder="password"><br>
@@ -33,7 +38,11 @@
                 </div>
             </fieldset>
         </form>
-        <?php echo "<p>".$error."</p>"; ?>
+        <?php
+        if ($error) {
+            echo "<p>".$error."</p>";
+        }
+        ?>
     </div>
 </body>
 </html>
