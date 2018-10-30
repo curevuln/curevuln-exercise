@@ -10,17 +10,10 @@
 #### 修正方法
 
 ```php
-
-//~~前略~~
-session_start();
-if($_GET['id'] != $_SESSION['id']){
-    //アクセス制限を伝える表示
-} else {
-    //正規の表示
-}
-//~~後略~~
-     
+$stmt   = $dbh->prepare($query);
+//$stmt->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
+$stmt->bindParam(':id', $_SESSION['id'], PDO::PARAM_INT);
+$stmt->execute();
+$usersData = $stmt->fetchAll();
 ```
-     
-のように入力文字列と認証情報が一致しているかを確認するのが適切である。
-より有効な実装として、URLでのユーザー情報参照を行わない、DBに対しユーザーの情報があるか問い合わせを行うなどが有効である。
+- ```$_SESSION['id']```を直接利用し検索を行う事で外部から変更を行える箇所を極力減らすことができる。
