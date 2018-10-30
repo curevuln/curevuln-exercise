@@ -14,6 +14,9 @@
                 <a href="/"><div>Top</div></a>
                 <a href="user.php"><div>Info</div></a>
                 <a href="logout.php"><div>Logout</div></a>
+                <div class="username">
+                    <?php echo $_SESSION["userName"] ?>さんこんにちは！
+                </div>
             <?php else: ?>
                 <a href="/"><p>Top</p></a>
                 <a href="./login.php"><p>login</p></a>

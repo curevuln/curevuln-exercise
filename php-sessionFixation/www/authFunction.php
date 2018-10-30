@@ -22,9 +22,7 @@ function login (object $dbh, string $login, string $password):bool {
         return (bool)false;
     }
 
-
-
-    $_SESSION["userName"]   = $usersData[0]['loginId'];
+    $_SESSION["userName"]   = $usersData[0]['loginid'];
     $_SESSION["id"]         = $usersData[0]['id'];
 
     return (bool)true;

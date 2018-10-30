@@ -14,6 +14,9 @@
                 <a href="/"><div>Top</div></a>
                 <a href="user.php"><div>Info</div></a>
                 <a href="logout.php"><div>Logout</div></a>
+                <div class="username">
+                    <?php echo $_SESSION["userName"] ?>さんこんにちは！
+                </div>
             <?php else: ?>
                 <a href="/"><p>Top</p></a>
                 <a href="./login.php"><p>login</p></a>
@@ -22,7 +25,6 @@
     </div>
     <div class="app">
         <h1>和菓子はこちらから</h1>
-
         <?php foreach ($products as $key => $product): ?>
             <div class="product">
                 <img width="380" height="380" src="./img/<?php echo $product['image'] ?>.jpg" alt="">

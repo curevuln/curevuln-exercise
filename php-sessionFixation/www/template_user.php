@@ -19,6 +19,9 @@ if ($_SESSION['id'] == '') {
             <a href="/"><div>Top</div></a>
             <a href="user.php"><div>Info</div></a>
             <a href="logout.php"><div>Logout</div></a>
+            <div class="username">
+                <?php echo $_SESSION["userName"] ?>さんこんにちは！
+            </div>
         </div>
     </div>
     <div class="app">

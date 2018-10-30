@@ -84,3 +84,12 @@ body .app > .review > .review-content {
 .pure-form-aligned .pure-controls{
     margin: auto;
 }
+.username{
+    color: #000;
+    text-decoration	:none;
+    line-height: 70px;
+    font-size: 25px;
+    float: right;
+    padding-left: 10px;
+    padding-right: 10px;
+}
