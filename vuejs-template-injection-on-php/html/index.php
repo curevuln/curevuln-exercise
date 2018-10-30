@@ -34,7 +34,7 @@
 
     <div id="app">
       <div>
-        検索結果:
+        検索キーワード:
         <?= htmlspecialchars((string) $_GET['search']) ?>
       </div>
     </div>
