@@ -1,5 +1,5 @@
 <?php
-require 'setting.php';
+require_once 'setting.php';
 if ($_SESSION['id'] == '') {
     header("Location: / ");
     exit();
@@ -25,6 +25,7 @@ try {
 } catch (PDOException $e) {
     echo $e;
 }
+/*ここにも欲しいな*/
 require 'template_product.php';
 
 ?>

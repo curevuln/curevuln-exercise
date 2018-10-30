@@ -1,5 +1,5 @@
 <?php
-require 'setting.php';
+require_once 'setting.php';
 if ($_SESSION['id'] == '') {
     header("Location: / ");
     exit();
@@ -19,8 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $stmt->bindParam(':productID',$_GET['id'],PDO::PARAM_STR);
     $stmt->execute();
     $products = $stmt->fetchAll();
-} else {
-
+} else if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    /*
+    * 何かが足りない
+    */
     $dbh = connectDB();
     $query = "SELECT * FROM product WHERE id = :productID ;";
     $stmt  = $dbh->prepare($query);
@@ -42,6 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $stmt->bindParam(':addr', $_POST['addr'], PDO::PARAM_STR);
     $stmt->execute();
 }
-
+/*ここにも欲しいな*/
 require 'template_shopping.php';
 ?>

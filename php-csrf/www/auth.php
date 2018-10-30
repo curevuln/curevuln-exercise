@@ -1,5 +1,5 @@
 <?php
-require 'setting.php';
+require_once 'setting.php';
 require_once 'common.php';
 require './authFunction.php';
 //変数定義

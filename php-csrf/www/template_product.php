@@ -52,7 +52,7 @@
                     </textarea><br>
                 </div>
                 <input id="product_id" type="hidden" name="product_id" value="<?php echo $products[0]['id']?>"><br>
-
+                <!-- 何かが足りない　-->
                 <div class="pure-controls">
                     <button type="submit" class="pure-button pure-button-primary">送信</button>
                 </div>
