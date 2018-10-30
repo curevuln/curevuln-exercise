@@ -1,16 +1,20 @@
 vaersion: 1
-title: タイトル
-description: 演習の概要説明
+title: DOM-Based XSSの対策
+description: DOM-Based XSSの対策について学びます
 difficulty: beginner
 language: php
 tag:
     - php
     - xss
-    - sqli
+    - dom-based
 text:
-    - title: ページ1
+    - title: 概要
       file: text/step1.md
-    - title: ページ2
+    - title: 攻撃方法
       file: text/step2.md
+    - title: 防御策
+      file: text/step3.md
+    - title: 演習
+      file: text/step4.md
 files:
-    - www/index.php
+    - www/innerHTML.html
