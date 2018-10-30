@@ -1,0 +1,18 @@
+vaersion: 1
+title: サーバーサイドレンダリングでVueJSを利用した際に生じるXSS
+description: PHPでサーバーサイドレンダリングしているアプリケーションでVueJSを利用した際に生じるXSSについて学びます
+difficulty: beginner
+language: javascript
+tag:
+    - php
+    - vuejs
+text:
+    - title: 概要
+      file: text/step1.md
+    - title: 攻撃方法
+      file: text/step2.md
+    - title: 防御策
+      file: text/step3.md
+files:
+    - html/index.php
+    - html/safe.php
