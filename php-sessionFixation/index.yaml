@@ -1,11 +1,12 @@
 vaersion: 1
-title: PHPにおけるXSS対策の基本(フォーム編)
-description: PHPにおけるXSS対策の基本を学びます
+title: PHPにおけるSession Fixation攻撃
+description: PHPにおけるるSession Fixation対策を学びます
 difficulty: beginner
 language: php
 tag:
     - php
     - xss
+    - session
 text:
     - title: セッションに関わる脆弱性の概要
       file: text/step1.md
