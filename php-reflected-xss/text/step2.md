@@ -8,6 +8,8 @@ XSS全般に関して、以下の手法が使えます。
 
 反射型XSS固有のやり方は以下の通りです。
 
+![反射型XSSの説明図](https://raw.githubusercontent.com/jj1bdx/curevuln-exercise/jj1bdx-php-reflected-xss/php-reflected-xss/images/reflected-xss.jpg)
+
 * a) 反射型XSSでは、攻撃用のJavaScriptコードは、利用者にアクセスさせるための罠サイトにあります。
 * b) 利用者はこの罠サイトを指すURLをクリックするか、あるいは直接罠サイトの内容を閲覧するなどの行為を通じアクセスします。
 * c) 罠サイトにアクセスすると、パラメータとしてJavaScriptを含んだ状態で攻撃対象サイトに遷移します。
