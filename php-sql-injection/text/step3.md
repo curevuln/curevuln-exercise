@@ -1,0 +1,31 @@
+## 防御策
+
+SQL文でプレースホルダを使い、SQL文を組み立てる際に外部からの文字列を直接組み込まないようにします。
+
+攻撃例に対する対策としては
+
+```php
+// PDO (PHP Data Objects) の使い方については参考文献の徳丸本の箇所を参照してください
+// $id と $pwd は外部から与えられるユーザIDとパスワード
+$opt = array(PDO::ATTR_ERRMODE => PDO:ERRMODE_EXCEPTION,
+             PDO::MYSQL_ATTR_MULTI_STATEMENTS => false,
+             PDO::ATTR_EMULATE_PREPARES => false);
+$db = new PDO("mysql:host:127.0.0.1;dbname=test;charset=utf8", "[username]", "[password]", $opt);
+$sql = "SELECT * FROM users WHERE id = ? AND PWD = ?"; // SQL文
+$ps = $db->prepare($sql);
+$ps->bindValue(1, $id, PDO::PARAM_STR);
+$ps->bindValue(2, $pwd, PDO::PARAM_STR);
+$ps->execute();
+```
+
+として、`?`で示されるプレースホルダを使うことで、文字列リテラルの解釈の問題を回避しています。
+
+なお、プレースホルダを使う際は、静的プレースホルダ（プリペアードステートメント）を使うことが徳丸本では推奨されています。
+
+### 保険的対策
+
+前述した根本的対策に抜けがあった場合やミドルウェアの脆弱性があった場合のSQLインジェクションの脆弱性の攻撃の被害を軽減するために、以下の対策を行います。
+
+* 詳細なエラーメッセージの抑止: エラーメッセージを通じてSQLインジェクション攻撃の結果を得たり、脆弱性の存在を外部から確認されることを防ぐために行います。PHPの場合はphp.iniに`display_errors = Off`と設定します。
+* 入力値の妥当性検証: アプリケーションの要件に従った入力値検証を行うことで、SQLインジェクション攻撃を回避できる場合があります。（ただし、根本的な対策としては、プレースホルダを使う必要があります。）
+* データベースの権限設定: アプリケーションが利用するデータベースのユーザに対して必要最小限な権限のみを与えることで、被害を軽減できる場合があります。
