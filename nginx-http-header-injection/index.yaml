@@ -1,12 +1,11 @@
-vaersion: 1
-title: DOM-Based XSSの対策
-description: DOM-Based XSSの対策について学びます
+version: 1
+title: HTTPヘッダインジェクション
+description: HTTPヘッダインジェクションについて学びます
 difficulty: beginner
-language: php
+language: nginx
 tag:
-    - php
-    - xss
-    - dom-based
+    - nginx
+    - injection
 text:
     - title: 概要
       file: text/step1.md
@@ -17,4 +16,4 @@ text:
     - title: 演習
       file: text/step4.md
 files:
-    - www/innerHTML.html
+    - nginx/nginx.conf
