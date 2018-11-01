@@ -1,22 +1,20 @@
 vaersion: 1
-title: PHPにおけるXSS対策の基本
-description: PHPにおけるXSS対策の基本を学びます
+title: 反射型XSS
+description: 反射型XSSについて学びます
 difficulty: beginner
 language: php
 tag:
     - php
     - xss
 text:
-    - title: XSS概要
+    - title: 概要
       file: text/step1.md
-    - title: 悪用例
+    - title: 攻撃方法
       file: text/step2.md
-    - title: 根本的対策
+    - title: 防御策
       file: text/step3.md
-    - title: PHPにおける対策
+    - title: 演習
       file: text/step4.md
-    - title: 修正
-      file: text/step5.md
 files:
     - www/index.php
     - www/template_index.php
