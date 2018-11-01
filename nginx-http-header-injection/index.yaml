@@ -1,0 +1,19 @@
+version: 1
+title: HTTPヘッダインジェクション
+description: HTTPヘッダインジェクションについて学びます
+difficulty: beginner
+language: nginx
+tag:
+    - nginx
+    - injection
+text:
+    - title: 概要
+      file: text/step1.md
+    - title: 攻撃方法
+      file: text/step2.md
+    - title: 防御策
+      file: text/step3.md
+    - title: 演習
+      file: text/step4.md
+files:
+    - nginx/nginx.conf
