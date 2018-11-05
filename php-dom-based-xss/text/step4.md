@@ -16,7 +16,7 @@ docker-compose up
 
 ### 攻撃
 
-1. `http://127.0.0.1/innerHTML.html#<img src=/ onerror=alert("wow")>` をブラウザのURLに指定し、アクセスする。
+1. 右上の疑似ブラウザのURLを `https://<表示されているドメイン>/innerHTML.html#<img src=/ onerror=alert("wow")>` に変更し、アクセスする。
 2. 実行された結果alertダイアログが表示される。
 
 ### 攻撃の対策
