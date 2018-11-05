@@ -32,9 +32,8 @@
           <div class="description">
             <?php
               $converter = new \cebe\markdown\MarkdownExtra();
-              $purifier = new HTMLPurifier();
               $html = $converter->parse($article['content']);
-              echo $purifier->purify($html);
+              echo $html;
             ?>
           </div>
         </div>
