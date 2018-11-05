@@ -17,4 +17,4 @@ text:
     - title: 演習
       file: text/step4.md
 files:
-    - www/innerHTML.html
+    - www/index.html
