@@ -11,12 +11,12 @@ docker-compose up
 ### アプリケーションの概要
 
 このアプリケーションでは、nginxの設定であえてHTTPヘッダインジェクションを可能にする設定を加えることで、
-特定のURL `http://127.0.0.1/v1/*.json` (`*`は任意の文字列)に対して、`X-Action: (任意の文字列)`というHTTPヘッダを返すようにしています。
+特定のURI `/v1/*.json` (`*`は任意の文字列)に対して、`X-Action: (任意の文字列)`というHTTPヘッダを返すようにしています。
 この任意の文字列の中で改行検査をしていないため、HTTPヘッダインジェクションを起こすことができます。
 
 ### 攻撃
 
-1. 以下のURLにアクセスします: `http://localhost/v1/see%0d%0aX-XSS-Protection:%200%0d%0aContent-Type:%20text%2fhtml%0d%0a%0d%0a%3Cscript%3Ealert(1)%3C/script%3E.json`
+1. 以下のURLにアクセスします: `https://<疑似ブラウザに表示されているドメイン>/v1/see%0d%0aX-XSS-Protection:%200%0d%0aContent-Type:%20text%2fhtml%0d%0a%0d%0a%3Cscript%3Ealert(1)%3C/script%3E.json`
 2. インジェクションによるJavaScriptのalertダイアログが上がってきます。
 
 この攻撃では、改行や特殊文字を解釈して示すと、以下の内容をHTTPヘッダインジェクションしていることになります。
