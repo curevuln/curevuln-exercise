@@ -1,6 +1,6 @@
 vaersion: 1
-title: PHPにおけるXSS対策の基本(フォーム編)
-description: PHPにおけるXSS対策の基本を学びます
+title: ファイルアップロードにまつわる任意コード実行
+description: PHPにおけるファイルアップロード機能による任意コード実行について学びます
 difficulty: beginner
 language: php
 tag:
