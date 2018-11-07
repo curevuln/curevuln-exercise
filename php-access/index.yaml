@@ -18,12 +18,5 @@ text:
     - title: URLに埋め込まれた認証/認可情報の対策
       file: text/step5.md
 files:
-    - www/auth.php
-    - www/authFunction.php
-    - www/common.php
-    - www/index.php
     - www/info.php
-    - www/logout.php
-    - www/template_auth_index.php
-    - www/template_noAuth_index.php
-    - www/template_info.php
+    - www/authFunction.php
