@@ -19,5 +19,7 @@ text:
       file: text/step5.md
 files:
     - www/fileFunction.php
+    - www/user.php
     - www/template_user.php
+    - www/registration.php
     - www/template_registration.php
