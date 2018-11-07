@@ -1,6 +1,6 @@
 vaersion: 1
-title: PHPにおけるXSS対策の基本(フォーム編)
-description: PHPにおけるXSS対策の基本を学びます
+title: PHPにおけるCSRF
+description: PHPにおけるCSRF対策の基本を学びます
 difficulty: beginner
 language: php
 tag:
