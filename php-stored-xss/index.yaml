@@ -1,6 +1,6 @@
 version: 1
-title: 持続型XSS
-description: 持続型XSSへの対策の基本を学びます
+title: 蓄積型XSS
+description: 蓄積型XSSへの対策の基本を学びます
 difficulty: beginner
 language: php
 tag:
@@ -16,14 +16,5 @@ text:
     - title: 演習
       file: text/step4.md
 files:
-    - www/auth.php
-    - www/authFunction.php
-    - www/common.php
-    - www/index.php
-    - www/input.php
-    - www/logout.php
-    - www/next.php
     - www/template_auth_index.php
     - www/template_noAuth_index.php
-    - www/template_input.php
-    - www/template_next.php
