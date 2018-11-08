@@ -20,6 +20,9 @@ Point
 その理由として、セッションの盗聴や漏洩
 
 [setcookie](http://php.net/manual/ja/function.setcookie.php)
+
 [用語解説]
+
 ※ secure属性  :クライアントからの通信が、セキュアなHTTPS接続の場合にのみクッキーが送信されるようにします。
+
 ※ httponly属性:HTTP を通してのみクッキーにアクセスできるようになり、JavaScriptのようなスクリプト言語からのアクセスはできなくなります。
