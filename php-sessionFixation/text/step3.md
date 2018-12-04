@@ -17,9 +17,11 @@ Point
 
 #### セッションハイジャック対策
 セッションハイジャックの対策として、先ほども述べたサイトへのアクセスの全HTTPS化が挙げられます。
-その理由として、セッションの盗聴や漏洩
+その理由として、セッションの盗聴や漏洩はHTTPS化に利用されている暗号スイート自体に脆弱性がない限り、外部から盗聴される事はないからです。
 
-[setcookie](http://php.net/manual/ja/function.setcookie.php)
+また、先ほどのセッション固定化攻撃対策で行なったことも有効であるので施すことを強く推奨する。
+
+PHP manual : http://php.net/manual/ja/function.setcookie.php
 
 [用語解説]
 

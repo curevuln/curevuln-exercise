@@ -20,4 +20,5 @@ text:
       file: text/step5.md
 files:
     - www/authFunction.php
+    - www/setting.php
     - www/template_product.php

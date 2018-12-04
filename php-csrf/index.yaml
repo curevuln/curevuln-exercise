@@ -21,5 +21,6 @@ files:
     - www/comment.php
     - www/product.php
     - www/shopping.php
+    - www/setting.php
     - www/template_product.php
     - www/template_shopping.php
