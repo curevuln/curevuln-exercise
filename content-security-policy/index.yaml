@@ -1,0 +1,18 @@
+vaersion: 1
+title: Content Security Policy
+description: CSP ( Content Security Policy ) について学びます
+difficulty: beginner
+language: php
+tag:
+    - php
+    - xss
+text:
+    - title: 概要
+      file: text/step1.md
+    - title: 演習
+      file: text/step4.md
+files:
+    - www/index.php
+    - www/template_index.php
+    - www/search.php
+    - www/template_search.php
