@@ -51,9 +51,9 @@ function is_private_ipaddr($ipddr) {
 ...
 
 $ip = gethostbyname($result['url']);
-if is_private_ipaddr($ip) {
+if (is_private_ipaddr($ip)) {
   $response = webhook($result['url'], $_POST['title']);
 } else {
-i  // エラー処理
+  // エラー処理
 }
 ```
