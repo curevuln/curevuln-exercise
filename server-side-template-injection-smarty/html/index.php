@@ -4,6 +4,7 @@
   $smarty = new Smarty();
   $secure_dirs[] = '/tmp/';
   $smarty->setTemplateDir('./templates/');
+  $smarty->setCompileDir('/tmp/'); # アレだけどとりあえず
 
   $html = "
     <h1>こんにちは、こんにちは</h1>
