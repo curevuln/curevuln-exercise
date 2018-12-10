@@ -14,7 +14,7 @@ services:
             context: "."
             dockerfile: "php-fpm/Dockerfile"
         volumes:
-            - "./www:/var/www/html"
+            - www:/var/www/html
         expose:
             - "9000"
         depends_on:
@@ -30,3 +30,10 @@ services:
             - "80:80"
         depends_on:
             - "php-fpm"
+
+volumes:
+    www:
+        driver_opts:
+          type: none
+          device: ${PWD}/www/
+          o: bind
