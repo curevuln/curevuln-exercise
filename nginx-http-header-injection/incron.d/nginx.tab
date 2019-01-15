@@ -1,0 +1,1 @@
+/etc/nginx/nginx.conf IN_MODIFY,IN_NO_LOOP nginx -s reload
