@@ -1,25 +1,10 @@
 version: '3'
 services:
-    mysql:
-        image: mysql:5.7.19
-        environment:
-            MYSQL_ALLOW_EMPTY_PASSWORD: "true"
-        volumes:
-            - "./db:/docker-entrypoint-initdb.d"
-        ports:
-            - "3306:3306"
-    app:
-        build:
-            context: "."
-            dockerfile: "./app/Dockerfile"
-        volumes:
-            - "./www:/var/www/html"
-            - "./app/apache2.conf:/etc/httpd/conf/httpd.conf"
-        expose:
-            - "9000"
-        depends_on:
-            - "mysql"
-        environment:
-            DATABASE_HOST: mysql
-        ports:
-            - "80:80"
+  app:
+    build:
+      context: app/
+    volumes:
+      - "./www:/var/www/html"
+      - "./app/apache2.conf:/etc/httpd/conf/httpd.conf"
+    ports:
+      - "80:80"
