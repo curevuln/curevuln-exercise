@@ -3,9 +3,8 @@
     header("X-XSS-Protection: 0;");
     $author = $_GET['author'];
     try {
-        $dbname = 'mysql:host=' . $_ENV['DATABASE_HOST'] . ';dbname=sampledb;charset=utf8mb4';
-        $dbh = new PDO($dbname, 'root', '');
-        $dbh->query("Set names utf8");
+        $dbname = 'pgsql:host=' . $_ENV['DATABASE_HOST'] . ';dbname=sampledb;port=5432';
+        $dbh = new PDO($dbname, 'postgres', 'example');
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sqlcode = "SELECT * FROM booklist WHERE author = '$author' ORDER BY id";
         $result = $dbh->query($sqlcode);

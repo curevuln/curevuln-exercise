@@ -46,3 +46,4 @@ files:
 ## テンプレート
 
 - [PHPとMySQLのテンプレート](./PHP_MYSQL_TEMPLATE)
+- [PHPとPostgreSQLのテンプレート](./PHP_POSTGRES_TEMPLATE)

@@ -7,11 +7,10 @@ SQL文でプレースホルダを使い、SQL文を組み立てる際に外部�
 ```php
 // PDO (PHP Data Objects) の使い方については参考文献の徳丸本の箇所を参照してください
 // $id と $pwd は外部から与えられるユーザIDとパスワード
-$opt = array(PDO::ATTR_ERRMODE => PDO:ERRMODE_EXCEPTION,
-             PDO::MYSQL_ATTR_MULTI_STATEMENTS => false,
+$$opt = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
              PDO::ATTR_EMULATE_PREPARES => false);
-$db = new PDO("mysql:host:127.0.0.1;dbname=test;charset=utf8", "[username]", "[password]", $opt);
-$sql = "SELECT * FROM users WHERE id = ? AND PWD = ?"; // SQL文
+$db = new PDO("pgsql:host=127.0.0.1;dbname=test", "[username]", "[password]", $opt);
+sql = "SELECT * FROM users WHERE id = ? AND PWD = ?"; // SQL文
 $ps = $db->prepare($sql);
 $ps->bindValue(1, $id, PDO::PARAM_STR);
 $ps->bindValue(2, $pwd, PDO::PARAM_STR);

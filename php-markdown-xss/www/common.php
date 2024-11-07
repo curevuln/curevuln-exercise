@@ -1,8 +1,8 @@
 <?php
   require_once 'vendor/autoload.php';
 
-  function connectdb() {
-    $db = 'mysql:host=' . $_ENV['DATABASE_HOST'] . ';dbname=blog;charset=utf8mb4';
-    return new PDO($db, 'root', '');
+  function connectDB() {
+      $dbname = 'pgsql:host=' . $_ENV['DATABASE_HOST'] . ';dbname=blog;port=5432';
+      return new PDO($dbname, 'postgres', 'example');
   }
 ?>

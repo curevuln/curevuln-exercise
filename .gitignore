@@ -1,2 +1,3 @@
 install.sh
 create_image.sh
+**/postgres/
