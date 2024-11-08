@@ -10,6 +10,6 @@ services:
     volumes:
       - ./myapp:/myapp
     ports:
-      - "80:3000"
+      - "8015:3000"
     depends_on:
       - db

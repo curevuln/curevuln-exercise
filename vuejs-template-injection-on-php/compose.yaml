@@ -2,6 +2,6 @@ services:
   web:
     image: php:7-apache
     ports:
-      - 80:80
+      - 8018:80
     volumes:
       - ./html:/var/www/html/

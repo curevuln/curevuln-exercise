@@ -9,7 +9,7 @@ services:
           - "./postgresql.conf:/etc/postgresql/postgresql.conf"
           - "./postgres:/var/lib/postgresql/data"
       ports:
-          - "5432:5432"
+          - "5431:5432"
   app:
     build:
       context: app/
@@ -17,8 +17,9 @@ services:
       - "./www:/var/www/html"
       - "./app/apache2.conf:/etc/httpd/conf/httpd.conf"
     ports:
-      - "80:80"
+      - "8004:80"
     depends_on:
         - "postgres"
     environment:
         DATABASE_HOST: postgres
+        DATABASE_PORT: 5431

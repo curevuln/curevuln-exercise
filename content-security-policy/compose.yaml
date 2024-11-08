@@ -20,13 +20,14 @@ services:
             - "postgres"
         environment:
             DATABASE_HOST: postgres
+            DATABASE_PORT: 5432
     nginx:
         image: "nginx:alpine"
         volumes:
             - "./www:/var/www"
             - "./nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
         ports:
-            - "80:80"
+            - "8000:80"
         depends_on:
             - "php-fpm"
 

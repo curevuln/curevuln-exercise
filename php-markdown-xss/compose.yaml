@@ -5,27 +5,28 @@ services:
           POSTGRES_USER: "postgres"
           POSTGRES_PASSWORD: "example"
         volumes:
-            - "./db:/docker-entrypoint-initdb.d"
-            - "./postgresql.conf:/etc/postgresql/postgresql.conf"
-            - "./postgres:/var/lib/postgresql/data"
+            - ./db:/docker-entrypoint-initdb.d
+            - ./postgresql.conf:/etc/postgresql/postgresql.conf
+            - ./postgres:/var/lib/postgresql/data"
         ports:
-            - "5432:5432"
+            - 5435:5432
     php-fpm:
         build:
-            context: "."
-            dockerfile: "php-fpm/Dockerfile"
+            context: .
+            dockerfile: php-fpm/Dockerfile
         volumes:
-            - "./www:/var/www/html"
+            - ./www:/var/www/html
         depends_on:
-            - "postgres"
+            - postgres
         environment:
             DATABASE_HOST: postgres
+            DATABASE_PORT: 5435
     nginx:
-        image: "nginx:alpine"
+        image: nginx:alpine
         volumes:
             - "./www:/var/www"
             - "./nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
         ports:
-            - "80:80"
+            - "8006:80"
         depends_on:
             - "php-fpm"
