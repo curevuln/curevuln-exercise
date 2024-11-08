@@ -8,8 +8,6 @@ services:
           - "./db:/docker-entrypoint-initdb.d"
           - "./postgresql.conf:/etc/postgresql/postgresql.conf"
           - "./postgres:/var/lib/postgresql/data"
-      ports:
-          - "5431:5432"
   app:
     build:
       context: app/
@@ -22,4 +20,4 @@ services:
         - "postgres"
     environment:
         DATABASE_HOST: postgres
-        DATABASE_PORT: 5431
+        DATABASE_PORT: 5432

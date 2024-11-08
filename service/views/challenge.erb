@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= @title %></title>
+  <style>
+    .content {
+      display: none; /* Initially hide content */
+    }
+  </style>
+</head>
+<body>
+  <h1><%= @title %></h1>
+  <% @markdown_contents.each_with_index do |entry, index| %>
+    <h2><button onclick="toggleContent('<%= index %>')"><%= File.basename(entry[:file_path], ".md") %></button></h2>
+    <div id="content_<%= index %>" class="content">
+      <%= entry[:html_content] %>
+    </div>
+  <% end %>
+
+  <script>
+    function toggleContent(index) {
+      var content = document.getElementById('content_' + index);
+      if (content.style.display === 'none') {
+        content.style.display = 'block';
+      } else {
+        content.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
+
