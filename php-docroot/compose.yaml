@@ -1,0 +1,24 @@
+services:
+  postgres:
+      image: postgres:latest
+      environment:
+        POSTGRES_USER: "postgres"
+        POSTGRES_PASSWORD: "example"
+      volumes:
+          - "./db:/docker-entrypoint-initdb.d"
+          - "./postgresql.conf:/etc/postgresql/postgresql.conf"
+          - "./postgres:/var/lib/postgresql/data"
+      ports:
+          - "5432:5432"
+  app:
+    build:
+      context: app/
+    volumes:
+      - "./www:/var/www/html"
+      - "./app/apache2.conf:/etc/httpd/conf/httpd.conf"
+    ports:
+      - "80:80"
+    depends_on:
+        - "postgres"
+    environment:
+        DATABASE_HOST: postgres

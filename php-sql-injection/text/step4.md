@@ -35,9 +35,8 @@ search.phpをプレースホルダを使うように書き換えることで脆�
     $author = $_GET['author'];
     try {
         $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::MYSQL_ATTR_MULTI_STATEMENTS => false,
             PDO::ATTR_EMULATE_PREPARES => false);
-        $dbname = 'mysql:host=' . $_ENV['DATABASE_HOST'] . ';dbname=sampledb;charset=utf8mb4';
+        $dbname = 'pgsql:host=' . $_ENV['DATABASE_HOST'] . ';dbname=sampledb;options=\'--client_encoding=UTF8\'';
         $dbh = new PDO($dbname, 'root', '', $options);
         $sqlcode = "SELECT * FROM booklist WHERE author = ? ORDER BY id";
         $result = $dbh->prepare($sqlcode);

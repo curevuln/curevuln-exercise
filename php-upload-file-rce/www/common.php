@@ -1,6 +1,6 @@
 <?php
 function connectDB() {
-    $dbname = 'mysql:host=' . $_ENV['DATABASE_HOST'] . ';dbname=member;charset=utf8mb4';
-    return new PDO($dbname, 'root', '');
+    $dbname = 'pgsql:host=' . $_ENV['DATABASE_HOST'] . ';dbname=member;port=5432';
+    return new PDO($dbname, 'postgres', 'example');
 }
 ?>

@@ -2,7 +2,7 @@
 require 'setting.php';
 
 function connectDB() {
-    $dbname = 'mysql:host=' . $_ENV['DATABASE_HOST'] . ';dbname=shop;charset=utf8mb4';
-    return new PDO($dbname, 'root', '');
+    $dbname = 'pgsql:host=' . $_ENV['DATABASE_HOST'] . ';dbname=shop;port=5432';
+    return new PDO($dbname, 'postgres', 'example');
 }
 ?>
